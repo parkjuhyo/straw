@@ -1,0 +1,78 @@
+student_dict_tuple= ({"202292001":"박주효"},{"202292002":"유즈루"},{"202292003":"박지성"},{"202292011":"이바라"}) #학생table
+        
+score_dict_list = [{'학번':"202292001", '국어':100, '영어':100, '파이썬': 200, '선형대수':100},
+    {'학번':"202292003", '국어':40, '영어':30, '파이썬': 10, '선형대수':95}] #성적table
+
+while True:
+    print('1.성적 추가 2. 성적 삭제 3. 성적 변경 4. 성적현황 출력') #선택지
+    select = int(input("메뉴 선택"))
+
+    if select == 1: 
+        number = input("학번")
+        student_dict_tuple_list = list(student_dict_tuple)  #튜플을 리스트로 고쳐줌
+        for i in range(len(student_dict_tuple_list)):
+            k = list(student_dict_tuple_list[i].keys())[0]
+            
+            
+            if k == number:
+                kor = int(input("국어"))
+                eng = int(input("영어"))
+                python = int(input("파이썬"))
+                math = int(input("선형대수"))
+                score = {'학번':number,'국어':kor,'영어':eng,'파이썬':python,'선형대수':math} #성적 table에 추가
+                score_dict_list.append(score)
+                print(*score_dict_list,sep = '\n') #1번선택결과 출력
+                break
+
+        else:
+            print("error") #입력한 학번이 학생table에 없을떄 error 출력
+            
+
+    if select == 2: 
+        number2 = input("학번")
+        del_number=next((item for item in score_dict_list if item['학번']== number2),None) #number2의 학번이 있는 딕셔너리 추출
+        score_dict_list.remove(del_number) # number2의 학번이 있는 딕셔너리 제거
+        print(score_dict_list) #2번선택결과 출력
+
+    if select == 3:
+        number3=(input("학번"))
+
+        for i in range(len(score_dict_list )):
+            q = list(score_dict_list[i].values())[0]
+
+        up_number = next((item for item in score_dict_list if item['학번'] == number3), None) #number3가 있는 딕셔너리 출력
+        print(up_number.values())
+
+        # a= input("성적을 변경할 과목을 입력하세요")
+        if up_number.values == "국어": # 출력되지않음
+            up_number["국어"]=500
+            print(score_dict_list)
+            
+    if select == 4:
+        number4 = int(input("학생의 학번을 입력하세요 : "))
+        for i in range (len(student_dict_tuple)) :
+            if number4== list(student_dict_tuple[i].keys())[0]:
+                name = list(list(student_dict_tuple)[i].values())[0]
+                if number4 == list(score_dict_list[i].values())[0]:
+                    avg = 0
+                    std_score = list(list(score_dict_list)[i].values())
+                    std_score.insert(1, name)
+                    for k in range (len(std_score)-2):
+                        avg += std_score[k+2]
+                        avg = avg/(len(std_score)-2)
+                        std_score.append(avg)
+                        print('학번 :', std_score[0], '\n성명 :', std_score[1], '\n국어 :', std_score[2], '\n영어 :', std_score[3], '\n파이썬 :', std_score[4], '\n선형대수 :', std_score[5], '\n평균 :', std_score[6])
+
+
+    
+          
+
+    
+
+        
+
+
+
+
+	
+        
